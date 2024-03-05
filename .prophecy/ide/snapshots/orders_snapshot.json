@@ -1,0 +1,174 @@
+{
+  "id" : "orders_snapshot",
+  "metainfo" : {
+    "label" : "orders_snapshot",
+    "autoLayout" : false,
+    "staleState" : "file",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "entityConfig" : {
+        "strategy" : "'timestamp'",
+        "updated_at" : "\"updated_date\"",
+        "target_schema" : "\"public_test\"",
+        "target_database" : "\"ntong\"",
+        "unique_key" : "\"order_id\"",
+        "type" : "SnapshotConfig"
+      }
+    },
+    "version" : 3
+  },
+  "processes" : {
+    "orders_snapshot##R1N1nzNw" : {
+      "id" : "orders_snapshot##R1N1nzNw",
+      "component" : "TargetSnapshot",
+      "metadata" : {
+        "label" : "orders_snapshot",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "query" : "SELECT * \n\nFROM orders_current_model\n",
+        "customQuery" : false,
+        "customQueryDisabled" : true
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "dxZ9jBhM",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "UPDATED_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "ACTIVE_FLAG",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "orders_current_model"
+        } ],
+        "outputs" : [ {
+          "id" : "hRvdD229",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "UPDATED_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "ACTIVE_FLAG",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "-iONo-Z-bzUfDC_SrtgWZ" : {
+      "id" : "-iONo-Z-bzUfDC_SrtgWZ",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "orders_current_model",
+        "slug" : "orders_current_model",
+        "x" : -200,
+        "y" : 20,
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "orders_current_model",
+          "sourceType" : "Model",
+          "alias" : ""
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "NUTlN_uUDqDry5L5Vz9CR",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "UPDATED_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "ACTIVE_FLAG",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "bmRqjEHYwY2sdQALfBdli$$pK092d7o_9bsFBHW7es35",
+    "source" : "-iONo-Z-bzUfDC_SrtgWZ",
+    "sourcePort" : "NUTlN_uUDqDry5L5Vz9CR",
+    "target" : "orders_snapshot##R1N1nzNw",
+    "targetPort" : "dxZ9jBhM"
+  } ],
+  "component" : "Snapshot"
+}

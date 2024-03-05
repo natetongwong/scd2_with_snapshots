@@ -22,9 +22,60 @@ functions:
   expressions: {}
   airflowFunctions: {}
 subgraphs: {}
-sqlModels: {}
+sqlModels:
+  .prophecy/metadata/sqlmodels/orders_current_model:
+    name: orders_current_model
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: ORDER_ID
+        dataType:
+          type: Number
+      - name: ORDER_DATE
+        dataType:
+          type: Date
+      - name: STATUS
+        dataType:
+          type: String
+      - name: UPDATED_DATE
+        dataType:
+          type: Date
+      - name: ACTIVE_FLAG
+        dataType:
+          type: String
+    description: null
+    author: nathan+demo@prophecy.io
+    files:
+    - models/orders_current_model.sql
+    - .prophecy/ide/models/orders_current_model.json
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2024-03-05 03:57:04'
 sqlMacros: {}
-sqlSeeds: {}
+sqlSeeds:
+  .prophecy/metadata/sqlseeds/seed_orders_data:
+    name: seed_orders_data
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: order_id
+        dataType:
+          type: Number
+      - name: order_date
+        dataType:
+          type: Date
+      - name: status
+        dataType:
+          type: String
+      - name: updated_date
+        dataType:
+          type: Date
+    description: null
+    author: nathan+demo@prophecy.io
+    files:
+    - seeds/seed_orders_data.csv
+    createdAt: '2024-03-05 03:55:11'
 sqlSources: {}
 sqlUnreferencedSources: {}
 sqlPipeline:

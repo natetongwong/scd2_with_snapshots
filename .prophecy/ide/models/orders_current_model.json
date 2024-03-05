@@ -1,0 +1,384 @@
+{
+  "id" : "orders_current_model",
+  "metainfo" : {
+    "label" : "orders_current_model",
+    "autoLayout" : false,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "entityConfig" : {
+        "materialized" : "table",
+        "database" : "'ntong'",
+        "schema" : "'test'",
+        "type" : "ModelConfig"
+      }
+    },
+    "version" : 3
+  },
+  "processes" : {
+    "orders_current_model##CyU7MXTC" : {
+      "id" : "orders_current_model##CyU7MXTC",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "orders_current_model",
+        "x" : 400,
+        "y" : 0,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM Set_Active_Flags\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "H2eRmpQr",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "UPDATED_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "ACTIVE_FLAG",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "Set_Active_Flags"
+        } ],
+        "outputs" : [ {
+          "id" : "GKrzjGuh",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "UPDATED_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "ACTIVE_FLAG",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "2Ed_W5AJpCwV_RBLJZ3tr" : {
+      "id" : "2Ed_W5AJpCwV_RBLJZ3tr",
+      "component" : "Seed",
+      "metadata" : {
+        "label" : "seed_orders_data",
+        "slug" : "seed_orders_data",
+        "x" : -160,
+        "y" : 0,
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "seed_orders_data",
+          "sourceType" : "Seed",
+          "alias" : ""
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "hGdwBw5K2G2lpWcSMPal2",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "order_id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "order_date",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "status",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "updated_date",
+              "dataType" : {
+                "type" : "Date"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "8bNb8Tf3ftLPUkal4YXRr$$GqwsChordq3lZs-NlwFV3" : {
+      "id" : "8bNb8Tf3ftLPUkal4YXRr$$GqwsChordq3lZs-NlwFV3",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Lower_case",
+        "x" : 20,
+        "y" : 0,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "columnsSelector" : [ "MxcPvsH73dr-IjTTijyjA$$e4UwyLNZHCPzVM_oEBtJM##order_id", "MxcPvsH73dr-IjTTijyjA$$e4UwyLNZHCPzVM_oEBtJM##order_date", "MxcPvsH73dr-IjTTijyjA$$e4UwyLNZHCPzVM_oEBtJM##status", "MxcPvsH73dr-IjTTijyjA$$e4UwyLNZHCPzVM_oEBtJM##updated_date" ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "order_id"
+          },
+          "alias" : "order_id"
+        }, {
+          "expression" : {
+            "expression" : "order_date"
+          },
+          "alias" : "order_date"
+        }, {
+          "expression" : {
+            "expression" : "lower(status)"
+          },
+          "alias" : "status"
+        }, {
+          "expression" : {
+            "expression" : "updated_date"
+          },
+          "alias" : "updated_date"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "MxcPvsH73dr-IjTTijyjA$$e4UwyLNZHCPzVM_oEBtJM",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "order_id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "order_date",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "status",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "updated_date",
+              "dataType" : {
+                "type" : "Date"
+              }
+            } ]
+          },
+          "slug" : "in0"
+        } ],
+        "outputs" : [ {
+          "id" : "onApkaUL0wjm85Wlh4i2Y$$Ts85etTHahz1JXIQWBxtd",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "UPDATED_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "3ZkHvgKZnfcwa5RPYjKRt$$q_uCRYZBQdWdWY4Ii-aH4" : {
+      "id" : "3ZkHvgKZnfcwa5RPYjKRt$$q_uCRYZBQdWdWY4Ii-aH4",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Set_Active_Flags",
+        "x" : 220,
+        "y" : 0,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "columnsSelector" : [ "Jpq4W4zdg31eL52_60c_D$$IS5FPWBfyEAZ89KZOtSgX##order_id", "Jpq4W4zdg31eL52_60c_D$$IS5FPWBfyEAZ89KZOtSgX##order_date", "Jpq4W4zdg31eL52_60c_D$$IS5FPWBfyEAZ89KZOtSgX##status", "Jpq4W4zdg31eL52_60c_D$$IS5FPWBfyEAZ89KZOtSgX##updated_date" ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "order_id"
+          },
+          "alias" : "order_id"
+        }, {
+          "expression" : {
+            "expression" : "order_date"
+          },
+          "alias" : "order_date"
+        }, {
+          "expression" : {
+            "expression" : "status"
+          },
+          "alias" : "status"
+        }, {
+          "expression" : {
+            "expression" : "updated_date"
+          },
+          "alias" : "updated_date"
+        }, {
+          "expression" : {
+            "expression" : "CASE\n  WHEN status = lower('ordered')\n    THEN 'Y'\n  WHEN status = lower('cancelled')\n    THEN 'N'\n  WHEN status = lower('in_transit')\n    THEN 'Y'\n  WHEN status = lower('completed')\n    THEN 'N'\nEND"
+          },
+          "alias" : "active_flag"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Jpq4W4zdg31eL52_60c_D$$IS5FPWBfyEAZ89KZOtSgX",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "UPDATED_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            } ]
+          },
+          "slug" : "in0"
+        } ],
+        "outputs" : [ {
+          "id" : "rzawdl0x0Lsj2MCJzSbrn$$pmUJ4nnoL4j05ElsQYmoT",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "UPDATED_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "ACTIVE_FLAG",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "uFR2-exsJgg0UJ-f8dT0l",
+    "source" : "8bNb8Tf3ftLPUkal4YXRr$$GqwsChordq3lZs-NlwFV3",
+    "sourcePort" : "onApkaUL0wjm85Wlh4i2Y$$Ts85etTHahz1JXIQWBxtd",
+    "target" : "3ZkHvgKZnfcwa5RPYjKRt$$q_uCRYZBQdWdWY4Ii-aH4",
+    "targetPort" : "Jpq4W4zdg31eL52_60c_D$$IS5FPWBfyEAZ89KZOtSgX"
+  }, {
+    "id" : "-kvKbH3VkFX9o5gVeKOwc",
+    "source" : "2Ed_W5AJpCwV_RBLJZ3tr",
+    "sourcePort" : "hGdwBw5K2G2lpWcSMPal2",
+    "target" : "8bNb8Tf3ftLPUkal4YXRr$$GqwsChordq3lZs-NlwFV3",
+    "targetPort" : "MxcPvsH73dr-IjTTijyjA$$e4UwyLNZHCPzVM_oEBtJM"
+  }, {
+    "id" : "U2DQFOF8eBm2W0B3QxTN4$$-yzZ3ZdAYwQJqu8cKZHP9",
+    "source" : "3ZkHvgKZnfcwa5RPYjKRt$$q_uCRYZBQdWdWY4Ii-aH4",
+    "sourcePort" : "rzawdl0x0Lsj2MCJzSbrn$$pmUJ4nnoL4j05ElsQYmoT",
+    "target" : "orders_current_model##CyU7MXTC",
+    "targetPort" : "H2eRmpQr"
+  } ],
+  "component" : "Model"
+}
